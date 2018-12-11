@@ -75,6 +75,50 @@
 <?php wp_footer(); ?>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/wp-content/themes/wp-bootstrap-4/assets/js/owl.carousel.min.js"></script>
+<script>
+	$('.ffa-carousel').owlCarousel({
+			loop:true,
+			margin:0,
+			nav:false,
+			responsive:{
+					0:{
+							items:1
+					}
+			}
+	})
+</script>
+
+<script>
+	$('.ffa-carousel-two').owlCarousel({
+			loop:true,
+			margin:0,
+			nav:false,
+			responsive:{
+					0:{
+							items:1
+					}
+			}
+	})
+</script>
+
+
+
+  <script src="https://embed.typeform.com/embed.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    window.addEventListener("DOMContentLoaded", function() {
+      var el = document.getElementById("my-embedded-typeform");
+      
+      // When instantiating a widget embed, you must provide the DOM element
+      // that will contain your typeform, the URL of your typeform, and your
+      // desired embed settings
+      window.typeformEmbed.makeWidget(el, "https://leslie136.typeform.com/to/GNrZ1o", {
+        hideFooter: true,
+        hideHeaders: true,
+        opacity: 0
+      });
+    });
+  </script>
 
 </body>
 </html>

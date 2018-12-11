@@ -22,6 +22,8 @@
 
 
 <link rel="stylesheet" href="/wp-content/themes/wp-bootstrap-4/assets/css/cj-styles.css">
+<link rel="stylesheet" href="/wp-content/themes/wp-bootstrap-4/assets/css/owl.carousel.min.css">
+<link rel="stylesheet" href="/wp-content/themes/wp-bootstrap-4/assets/css/owl.theme.default.min.css">
 
 </head>
 
