@@ -10,3 +10,4 @@
   <?php include 'modules/typeform.php'; ?>
   <?php include 'modules/four-up-lightbox.php'; ?>
   <?php include 'modules/half-width-left-list.php'; ?>
+  <?php include 'modules/four-up-carousel.php'; ?>
