@@ -223,7 +223,7 @@ input.email::placeholder
   background-size: cover;
 }
 
-.half-width-module > div, .slash > div {
+.half-width-module > div, .slash > div .alternate-header > div {
   width: 50%;
   display: inline-block;
   float: left;
