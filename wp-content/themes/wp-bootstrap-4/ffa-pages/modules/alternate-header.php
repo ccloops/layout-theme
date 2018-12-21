@@ -1,4 +1,4 @@
-<section class="slash">
+<section class="slash alternate-header-module">
   <div>
    <img src="https://via.placeholder.com/150" alt="">
   </div>

@@ -1,4 +1,4 @@
-<section class="four-up">
+<section class="four-up-lightbox">
   <h2>Heading</h2>
   <div class="container">
     <div class="row">

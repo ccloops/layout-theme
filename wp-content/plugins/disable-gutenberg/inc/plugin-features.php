@@ -2,11 +2,17 @@
 
 if (!defined('ABSPATH')) exit;
 
-// THANKS to Classic Editor for these "feature" functions
+// THANKS to Classic Editor for the inspiration for these "feature" functions.
 
 function disable_gutenberg_add_submenus() {
 	
 	if (disable_gutenberg()) return;
+	
+	if (!disable_gutenberg_enable_features()) return;
+	
+	$types = array();
+	
+	$types = apply_filters('disable_gutenberg_submenu_types', $types);
 	
 	foreach (get_post_types(array('show_ui' => true)) as $type) {
 		
@@ -23,6 +29,10 @@ function disable_gutenberg_add_submenus() {
 			} elseif ('page' === $type) {
 				
 				$parent_slug = 'edit.php?post_type=page';
+				
+			} elseif (in_array($type, $types)) {
+				
+				$parent_slug = 'edit.php?post_type='. $type;
 				
 			} else {
 				
@@ -49,45 +59,51 @@ add_action('admin_menu', 'disable_gutenberg_add_submenus');
 
 function disable_gutenberg_page_row_actions($actions, $post) {
 	
-	if (disable_gutenberg()) return $actions;
+	if (!disable_gutenberg_enable_features()) return $actions;
 	
-	if (array_key_exists('classic', $actions)) return $actions;
+	if (disable_gutenberg_whitelist($post->ID)) return $actions;
+	
+	if (!array_key_exists('edit', $actions)) return $actions;
+	
+	if (array_key_exists('classic', $actions)) unset($actions['classic']);
 	
 	if ('trash' === $post->post_status || !post_type_supports($post->post_type, 'editor')) return $actions;
+	
+	$title = _draft_or_post_title($post->ID);
 	
 	$edit_url = get_edit_post_link($post->ID, 'raw');
 	
 	if (!$edit_url) return $actions;
-
-	$edit_url = add_query_arg('classic-editor', '', $edit_url);
 	
-	$title = _draft_or_post_title($post->ID);
+	$url = remove_query_arg(array('block-editor', 'classic-editor'), $edit_url);
 	
-	$edit_action = array(
-		
-		'classic' => sprintf(
-			
-			'<a href="%s" aria-label="%s">%s</a>',
-			
-			esc_url($edit_url),
-			
-			esc_attr(sprintf(
-				
-				__('Edit &#8220;%s&#8221; with Classic Editor', 'disable-gutenberg'),
-				
-				$title
-				
-			)),
-			
-			__('Edit (Classic)', 'disable-gutenberg')
-			
-		),
-		
-	);
+	//
+	
+	$block_url = add_query_arg('block-editor', '', $url);
+	
+	$block_text = __('Block Edit', 'disable-gutenberg');
+	
+	$block_label = sprintf(__('Edit &#8220;%s&#8221; in the Block Editor', 'disable-gutenberg'), $title);
+	
+	$block_action = sprintf('<a href="%s" aria-label="%s" title="%s">%s</a>', esc_url($block_url), esc_attr($block_label), esc_attr($block_label), esc_html($block_text));
+	
+	//
+	
+	$classic_url = add_query_arg('classic-editor', '', $url);
+	
+	$classic_text = __('Classic Edit', 'disable-gutenberg');
+	
+	$classic_label = sprintf(__('Edit &#8220;%s&#8221; in the Classic Editor', 'disable-gutenberg'), $title);
+	
+	$classic_action = sprintf('<a href="%s" aria-label="%s" title="%s">%s</a>', esc_url($classic_url), esc_attr($classic_label), esc_attr($classic_label), esc_html($classic_text));
+	
+	//
 	
 	$edit_offset = array_search('edit', array_keys($actions), true);
 	
-	array_splice($actions, $edit_offset + 1, 0, $edit_action);
+	array_splice($actions, $edit_offset, 1, $block_action);
+	
+	array_unshift($actions, $classic_action);
 	
 	return $actions;
 	
@@ -99,9 +115,17 @@ add_filter('post_row_actions', 'disable_gutenberg_page_row_actions', 15, 2);
 
 function disable_gutenberg_get_edit_post_link($url) {
 	
-	global $current_screen;
-	
 	if (!isset($_REQUEST['classic-editor']) && !disable_gutenberg()) return $url;
+	
+	$query = array();
+	
+	$parts = parse_url($url);
+	
+	if (isset($parts['query'])) parse_str($parts['query'], $query);
+
+	$post_id = isset($query['post']) ? $query['post'] : false;
+	
+	if (disable_gutenberg_whitelist($post_id)) return $url;
 	
 	$url = add_query_arg('classic-editor', '', $url);
 	
@@ -113,8 +137,6 @@ add_filter('get_edit_post_link', 'disable_gutenberg_get_edit_post_link');
 
 
 function disable_gutenberg_redirect_post_location($location) {
-	
-	global $current_screen;
 	
 	if (!isset($_REQUEST['classic-editor']) && !disable_gutenberg()) return $location;
 	
@@ -133,8 +155,6 @@ add_filter('redirect_post_location', 'disable_gutenberg_redirect_post_location')
 
 function disable_gutenberg_edit_form_top() {
 	
-	global $current_screen;
-	
 	if (!isset($_GET['classic-editor']) && !disable_gutenberg()) return;
 	
 	?>
@@ -145,3 +165,15 @@ function disable_gutenberg_edit_form_top() {
 	
 }
 add_action('edit_form_top', 'disable_gutenberg_edit_form_top');
+
+
+
+function disable_gutenberg_enable_features() {
+	
+	$options = disable_gutenberg_get_options();
+	
+	$enable = (isset($options['links-enable']) && !empty($options['links-enable'])) ? true : false;
+	
+	return $enable;
+	
+}

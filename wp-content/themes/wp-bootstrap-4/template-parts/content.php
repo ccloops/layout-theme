@@ -16,6 +16,8 @@
 			<span class="oi oi-bookmark wp-bp-sticky text-muted" title="<?php echo esc_attr__( 'Sticky Post', 'wp-bootstrap-4' ); ?>"></span>
 		<?php endif; ?>
 		<header class="entry-header">
+
+
 			<?php
 			if ( is_singular() ) :
 				the_title( '<h1 class="entry-title card-title h2">', '</h1>' );
@@ -29,6 +31,17 @@
 			</div><!-- .entry-meta -->
 			<?php
 			endif; ?>
+
+
+<!-- shares -->
+
+
+
+<?php if(is_single()){?>
+<?php include 'social-sharing.php'?>
+<?php } ?>
+
+
 		</header><!-- .entry-header -->
 
 		<?php wp_bootstrap_4_post_thumbnail(); ?>
@@ -64,13 +77,21 @@
 			</div><!-- .entry-summary -->
 		<?php endif; ?>
 
+		<?php if(!is_single()){?>
+		<?php include 'social-sharing.php'?>
+		<?php } ?>
+
+
 	</div>
 	<!-- /.card-body -->
 
 	<?php if ( 'post' === get_post_type() ) : ?>
-		<footer class="entry-footer card-footer text-muted">
+		<footer class="entry-footer card-footer text-muted" style="display:none;">
 			<?php wp_bootstrap_4_entry_footer(); ?>
 		</footer><!-- .entry-footer -->
 	<?php endif; ?>
 
+<?php if(!is_single()){?>
+<hr />
+<?php } ?>
 </article><!-- #post-<?php the_ID(); ?> -->

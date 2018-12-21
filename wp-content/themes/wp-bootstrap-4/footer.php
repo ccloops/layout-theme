@@ -80,7 +80,8 @@
 	$('.ffa-carousel').owlCarousel({
 			loop:true,
 			margin:0,
-			nav:false,
+			nav:true,
+			dots: false,
 			responsive:{
 					0:{
 							items:1
@@ -93,7 +94,8 @@
 	$('.ffa-carousel-two').owlCarousel({
 			loop:true,
 			margin:0,
-			nav:false,
+			nav:true,
+			dots: false,
 			responsive:{
 					0:{
 							items:1
@@ -108,7 +110,7 @@
   <script type="text/javascript">
     window.addEventListener("DOMContentLoaded", function() {
       var el = document.getElementById("my-embedded-typeform");
-      
+
       // When instantiating a widget embed, you must provide the DOM element
       // that will contain your typeform, the URL of your typeform, and your
       // desired embed settings

@@ -1,4 +1,4 @@
-<section>
+<section class="half-width-left-list">
   <div class="container">
     <h2>Upcoming Cities and Dates</h2>
   </div>
