@@ -88,9 +88,7 @@
 					}
 			}
 	})
-</script>
 
-<script>
 	$('.ffa-carousel-two').owlCarousel({
 			loop:true,
 			margin:0,
@@ -102,7 +100,34 @@
 					}
 			}
 	})
+
+	$('.ffa-carousel-three').owlCarousel({
+			loop:true,
+			margin:0,
+			nav:true,
+			dots: false,
+			responsive:{
+					0:{
+							items:1
+					}
+			}
+	})
+
+	$('.ffa-carousel-singular').owlCarousel({
+			loop:true,
+			margin:0,
+			nav:true,
+			dots: false,
+			responsive:{
+					0:{
+							items:1
+					}
+			}
+	})
 </script>
+
+
+
 
 
 

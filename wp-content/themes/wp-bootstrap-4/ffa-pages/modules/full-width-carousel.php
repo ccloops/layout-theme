@@ -1,22 +1,58 @@
 <section class="full-width-carousel">
   <div class="owl-carousel owl-theme ffa-carousel-two">
+
+
+<?php
+
+// check if the repeater field has rows of data
+if( have_rows('slide_repeater') ):
+
+  // loop through the rows of data
+    while ( have_rows('slide_repeater') ) : the_row();
+?>
     <div class="item">
-      <div style="background-image: url('https://via.placeholder.com/150')">
-        <h1>Female Founders Alliance</h1>
-        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+      <div style="background-image: url('<?php the_sub_field('image') ?>')">
+      <?php if(get_sub_field('header')){ ?>
+        <h2><?php the_sub_field('header') ?></h2>
+      <?php } ?>
+      <?php if(get_sub_field('subheader')){ ?>
+        <h3><?php the_sub_field('subheader') ?></h3>
+      <?php } ?>
+      <?php if(get_sub_field('text')){ ?>
+        <p><?php the_sub_field('text') ?></p>
+      <?php } ?>
+<br />
+      <?php if(get_sub_field('author')){ ?>
+        <span class="author"><?php the_sub_field('author') ?></span>
+      <?php } ?>
+<br />
+      <?php if(get_sub_field('author_description')){ ?>
+        <span class="author_description"><?php the_sub_field('author_description') ?></span>
+      <?php } ?>
+<br /><br />
+    <?php if(get_sub_field('call_to_action_button')){ ?>
+        <?php $cta = get_sub_field('call_to_action_button'); ?>
+        <a class="cta-btn" href="<?php echo $cta['link'] ?>">
+          <?php echo $cta['text'] ?>
+        </a>
+    <?php } ?>
+
+
       </div>
     </div>
-    <div class="item">
-      <div style="background-image: url('https://via.placeholder.com/150')">
-        <h1>Female Founders Alliance</h1>
-        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-      </div>
-    </div>
-    <div class="item">
-      <div style="background-image: url('https://via.placeholder.com/150')">
-        <h1>Female Founders Alliance</h1>
-        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-      </div>
-    </div>
+
+<?php
+    endwhile;
+else :
+endif; ?>
+
+
   </div>
 </section>
+
+
+
+
+
+
+

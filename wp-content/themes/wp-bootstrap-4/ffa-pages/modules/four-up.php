@@ -1,23 +1,34 @@
 <section class="four-up">
-  <h2>Heading</h2>
+  <?php if(get_sub_field('header')){ ?>
+    <h2><?php the_sub_field('header') ?></h2>
+  <?php } ?>
   <div class="container">
     <div class="row">
+    <?php
+
+// check if the repeater field has rows of data
+if( have_rows('four_up_repeater') ):
+
+  // loop through the rows of data
+    while ( have_rows('four_up_repeater') ) : the_row();
+?>
+
       <div class="col-sm-3">
-        <img src="https://via.placeholder.com/150" alt="">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut molestiae eius non maiores mollitia beatae magnam provident debitis delectus porro! Voluptas excepturi odio, officia fugiat ipsam alias accusamus temporibus quisquam.</p>
+        <?php if(get_sub_field('image')){ ?>
+          <img src="<?php the_sub_field('image') ?>" alt="<?php the_sub_field('image') ?>">
+        <?php } ?>
+
+        <?php if(get_sub_field('text')){ ?>
+          <p><?php the_sub_field('text') ?></p>
+        <?php } ?>
       </div>
-      <div class="col-sm-3">
-        <img src="https://via.placeholder.com/150" alt="">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut molestiae eius non maiores mollitia beatae magnam provident debitis delectus porro! Voluptas excepturi odio, officia fugiat ipsam alias accusamus temporibus quisquam.</p>
-      </div>
-      <div class="col-sm-3">
-        <img src="https://via.placeholder.com/150" alt="">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut molestiae eius non maiores mollitia beatae magnam provident debitis delectus porro! Voluptas excepturi odio, officia fugiat ipsam alias accusamus temporibus quisquam.</p>
-      </div>
-      <div class="col-sm-3">
-        <img src="https://via.placeholder.com/150" alt="">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut molestiae eius non maiores mollitia beatae magnam provident debitis delectus porro! Voluptas excepturi odio, officia fugiat ipsam alias accusamus temporibus quisquam.</p>
-      </div>
+
+<?php
+    endwhile;
+else :
+endif; ?>
+
     </div>
   </div>
 </section>
+
