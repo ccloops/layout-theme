@@ -1,0 +1,104 @@
+.slash{
+  min-height: 480px;
+}
+
+.slash > div{
+
+  width: 50%;
+  background: pink;
+  float: left;
+  min-height: 480px;
+}
+
+
+.slash div{
+
+  /*background: green;*/
+
+}
+
+
+
+.slash div:first-child{
+
+  /*background: pink;*/
+
+}
+
+
+.slash .slash-container {
+    background-image: url(/wp-content/themes/wp-bootstrap-4/assets/images/slash-blue.svg);
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: cover;
+    min-height: 480px;
+    position: relative;
+    padding-left: 60px;
+    padding-top: 80px;
+    width: 120%;
+    color: white;
+}
+
+
+
+.slash .slash-container p,
+.slash .slash-container h2,
+.slash .slash-container h2 a.text-dark{
+    color: white !important;
+  }
+
+
+.slash div:nth-child(2){
+    padding-left: 60px;
+    padding-top: 80px;
+}
+
+
+
+.slash-mobile{
+  display: none;
+}
+
+  @media(max-width: 992px) {
+
+
+.slash > div{
+  width: 100%;
+}
+
+
+.slash .slash-container {
+    background-color: #261C42;
+}
+
+
+.slash-mobile{
+  display: block;
+}
+
+
+.cta-btn.slash-mobile{
+      display: inline-block;
+}
+
+.slash-container{
+  display: none;
+}
+
+.slash div:first-child{
+  padding-left: 60px;
+  padding-top: 80px;
+  background-color: #261C42;
+  color: #fff;
+}
+
+.slash div:first-child h3,
+.slash div:first-child h2,
+.slash div:first-child p{
+  color: #fff !important;
+}
+
+}
+
+
+

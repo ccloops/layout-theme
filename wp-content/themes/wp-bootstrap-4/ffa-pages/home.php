@@ -1,5 +1,3 @@
-<h1><?php the_title(); ?></h1>
-
 	<?php include 'modules/carousel.php'; ?>
   <?php include 'modules/full-width.php'; ?>
   <?php include 'modules/full-width-image.php'; ?>

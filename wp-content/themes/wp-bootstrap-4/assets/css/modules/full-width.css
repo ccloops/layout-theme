@@ -1,0 +1,44 @@
+
+.full-width-module {
+    text-align: center;
+    padding: 50px 25px 70px 25px;
+    min-height: 400px;
+}
+
+
+
+.full-width-module p{
+    width: 46%;
+    margin: 15px auto 30px;
+    text-align: justify;
+    text-justify: inter-word;
+    line-height: 32px;
+}
+
+
+
+.full-width-module h2,
+.full-width-module h3{
+      margin-bottom: 12px;
+}
+
+
+.full-width-module h3{
+  font-size: 26px;
+  font-family: "Gotham-Book";
+}
+
+
+@media (max-width: 768px){
+.full-width-module p {
+    width: 80%;
+  }
+}
+
+
+
+@media (max-width: 640px){
+.full-width-module p {
+    width: 100%;
+  }
+}

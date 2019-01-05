@@ -61,10 +61,7 @@
 				?>
 			<?php if( get_theme_mod( 'header_within_container', 0 ) ) : ?></div><!-- /.container --><?php endif; ?>
 
-
-
-<button class="header-button">cta</button>
-
+<a class="cta-btn in-header" href="ctalink">Donate</a>
 
 		</nav><!-- #site-navigation -->
 	</header><!-- #masthead -->

@@ -1,22 +1,96 @@
-<section class="four-up">
-  <h2>Heading</h2>
+<section class="four-up-lightbox">
+
+
+
+
+
+<div class="container text-center">
+  <?php if(get_sub_field('header')){ ?>
+    <h2><?php the_sub_field('header') ?></h2>
+  <?php } ?>
+
+</div>
+
+
+
   <div class="container">
     <div class="row">
+
+
+
+
+<?php
+
+// check if the repeater field has rows of data
+if( have_rows('lightbox_repeater') ):
+
+  // loop through the rows of data
+    while ( have_rows('lightbox_repeater') ) : the_row();
+?>
+
       <div class="col-sm-3">
-        <img src="https://via.placeholder.com/150" alt="">
-        <h5>Speaker Name</h5>
-        <h6>Seattle Tech Blog</h6>
+
+
+      <?php if(get_sub_field('image')){ ?>
+      <img src="<?php the_sub_field('image') ?>" alt="<?php the_sub_field('image') ?>">
+      <?php } ?>
+
+      <?php if(get_sub_field('name')){ ?>
+       <h5><?php the_sub_field('name') ?></h5>
+      <?php } ?>
+
+
+      <?php if(get_sub_field('title')){ ?>
+       <h6><?php the_sub_field('title') ?></h6>
+      <?php } ?>
           <div class="lightbox-content">
-            <div class="handle">
-              @twitter / sub heading
-            </div>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt voluptatem debitis doloribus quis id ipsum, quasi recusandae temporibus dolores. Quidem natus, non sunt praesentium nobis adipisci quis ullam consequuntur distinctio!</p>
+     <?php if(get_sub_field('description')){ ?>
+       <div class="handle"><?php the_sub_field('contact_info') ?></div>
+      <?php } ?>
+     <?php if(get_sub_field('description')){ ?>
+       <p><?php the_sub_field('description') ?></p>
+      <?php } ?>
+
           </div>
       </div>
+
+
+
+<?php
+    endwhile;
+else :
+endif; ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
-    <div class="row">
-      <h3>Are you interested in...?</h3>
-      <a href="google.com">Seattle Tech Blog</a>
+    <div class="row text-center">
+  <?php if(get_sub_field('secondary_header')){ ?>
+    <h3 class="secondary-header"><?php the_sub_field('secondary_header') ?></h3>
+  <?php } ?>
+    </div>
+    <div class="row text-center">
+
+    <?php if(get_sub_field('call_to_action_button')){ ?>
+        <?php $cta = get_sub_field('call_to_action_button'); ?>
+        <a class="cta-btn secondary-cta" href="<?php echo $cta['link'] ?>">
+          <?php echo $cta['text'] ?>
+        </a>
+    <?php } ?>
+
+
+
     </div>
   </div>
 </section>

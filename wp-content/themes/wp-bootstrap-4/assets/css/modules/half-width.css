@@ -1,0 +1,29 @@
+
+.half-width-module{
+  margin-top: -8px;
+  background: #fff;
+}
+
+
+
+.half-width-module div:first-child{
+  padding: 100px;
+}
+
+
+
+
+@media (max-width: 960px) {
+
+  .half-width-module > div{
+    width: 100%;
+  }
+
+
+
+.half-width-module div:first-child{
+  padding: 100px 30px;
+}
+
+
+}
