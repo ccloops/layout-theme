@@ -786,11 +786,11 @@ function dynamic_sidebar( $index = 1 ) {
  *
  * NOTE: $widget_id and $id_base are the same for single widgets. To be effective
  * this function has to run after widgets have initialized, at action {@see 'init'} or later.
- * 
+ *
  * For more information on this and similar theme functions, check out
- * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/ 
+ * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
  * Conditional Tags} article in the Theme Developer Handbook.
- * 
+ *
  * @since 2.2.0
  *
  * @global array $wp_registered_widgets
@@ -827,11 +827,11 @@ function is_active_widget( $callback = false, $widget_id = false, $id_base = fal
 
 /**
  * Determines whether the dynamic sidebar is enabled and used by the theme.
- * 
+ *
  * For more information on this and similar theme functions, check out
- * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/ 
+ * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
  * Conditional Tags} article in the Theme Developer Handbook.
- * 
+ *
  * @since 2.2.0
  *
  * @global array $wp_registered_widgets
@@ -854,11 +854,11 @@ function is_dynamic_sidebar() {
 
 /**
  * Determines whether a sidebar is in use.
- * 
+ *
  * For more information on this and similar theme functions, check out
- * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/ 
+ * the {@link https://developer.wordpress.org/themes/basics/conditional-tags/
  * Conditional Tags} article in the Theme Developer Handbook.
- * 
+ *
  * @since 2.8.0
  *
  * @param string|int $index Sidebar name, id or number to check.
@@ -1619,7 +1619,7 @@ function wp_widgets_init() {
 
 	register_widget( 'WP_Widget_Calendar' );
 
-	register_widget( 'WP_Widget_Archives' );
+	// register_widget( 'WP_Widget_Archives' );
 
 	if ( get_option( 'link_manager_enabled' ) ) {
 		register_widget( 'WP_Widget_Links' );
@@ -1633,9 +1633,9 @@ function wp_widgets_init() {
 
 	register_widget( 'WP_Widget_Media_Video' );
 
-	register_widget( 'WP_Widget_Meta' );
+	// register_widget( 'WP_Widget_Meta' );
 
-	register_widget( 'WP_Widget_Search' );
+	// register_widget( 'WP_Widget_Search' );
 
 	register_widget( 'WP_Widget_Text' );
 
@@ -1643,7 +1643,7 @@ function wp_widgets_init() {
 
 	register_widget( 'WP_Widget_Recent_Posts' );
 
-	register_widget( 'WP_Widget_Recent_Comments' );
+	// register_widget( 'WP_Widget_Recent_Comments' );
 
 	register_widget( 'WP_Widget_RSS' );
 

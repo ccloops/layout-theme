@@ -8,9 +8,17 @@ function disable_gutenberg_init() {
 	
 }
 
-function disable_gutenberg() {
+function disable_gutenberg($post_id = false) {
 	
 	if (is_plugin_active('classic-editor/classic-editor.php')) return false;
+	
+	if (disable_gutenberg_whitelist_id($post_id)) return false;
+	
+	if (disable_gutenberg_whitelist_slug($post_id)) return false;
+	
+	if (disable_gutenberg_whitelist_title($post_id)) return false;
+	
+	if (isset($_GET['block-editor'])) return false;
 	
 	if (isset($_GET['classic-editor'])) return true;
 	
@@ -22,7 +30,7 @@ function disable_gutenberg() {
 	
 	if (disable_gutenberg_disable_templates()) return true;
 	
-	if (disable_gutenberg_disable_ids()) return true;
+	if (disable_gutenberg_disable_ids($post_id)) return true;
 	
 	return false;
 	
@@ -222,11 +230,11 @@ function disable_gutenberg_disable_templates() {
 	
 }
 
-function disable_gutenberg_disable_ids() {
+function disable_gutenberg_disable_ids($post_id = false) {
 	
 	$excluded = array();
 	
-	$post_id = isset($_GET['post']) ? intval($_GET['post']) : null;
+	$post_id = disable_gutenberg_get_post_id($post_id);
 	
 	if (is_admin() && !empty($post_id)) {
 		
@@ -261,5 +269,141 @@ function disable_gutenberg_menu_items() {
 	
 	if ($hide_plugin)    remove_submenu_page('options-general.php', 'disable-gutenberg');
 	if ($hide_gutenberg) remove_menu_page('gutenberg');
+	
+}
+
+function disable_gutenberg_acf_enable_meta() {
+	
+	$options = disable_gutenberg_get_options();
+	
+	$enable = isset($options['acf-enable']) ? $options['acf-enable'] : false;
+	
+	if ($enable) add_filter('acf/settings/remove_wp_meta_box', '__return_false');
+	
+}
+
+function disable_gutenberg_privacy_notice() {
+	
+	global $pagenow;
+	
+	if ($pagenow !== 'post.php') return;
+	
+	if (!disable_gutenberg()) return;
+	
+	remove_action('admin_notices', array('WP_Privacy_Policy_Content', 'notice'));
+	
+	add_action('edit_form_after_title', array('WP_Privacy_Policy_Content', 'notice'));
+	
+}
+
+function disable_gutenberg_whitelist($post_id = false) {
+	
+	if (disable_gutenberg_whitelist_id($post_id)) return true;
+	
+	if (disable_gutenberg_whitelist_slug($post_id)) return true;
+	
+	if (disable_gutenberg_whitelist_title($post_id)) return true;
+	
+	return false;
+	
+}
+
+function disable_gutenberg_whitelist_id($post_id = false) {
+	
+	$whitelist = array();
+	
+	$post_id = disable_gutenberg_get_post_id($post_id);
+	
+	if (is_admin() && !empty($post_id)) {
+		
+		$options = disable_gutenberg_get_options();
+		
+		$whitelist = isset($options['whitelist-id']) ? $options['whitelist-id'] : null;
+		
+		$whitelist = disable_gutenberg_explode($whitelist);
+		
+	}
+	
+	return in_array($post_id, $whitelist);
+	
+}
+
+function disable_gutenberg_whitelist_slug($post_id = false) {
+	
+	$whitelist = array();
+	
+	$slug = false;
+	
+	$post_id = disable_gutenberg_get_post_id($post_id);
+	
+	$status = get_post_status($post_id);
+	
+	if (is_admin() && !empty($post_id) && $status === 'publish') {
+		
+		$post = get_post($post_id);
+		
+		$slug = $post->post_name;
+		
+		$options = disable_gutenberg_get_options();
+		
+		$whitelist = isset($options['whitelist-slug']) ? $options['whitelist-slug'] : null;
+		
+		$whitelist = disable_gutenberg_explode($whitelist);
+		
+	}
+	
+	return in_array($slug, $whitelist);
+	
+}
+
+function disable_gutenberg_whitelist_title($post_id = false) {
+	
+	$whitelist = array();
+	
+	$title = false;
+	
+	$post_id = disable_gutenberg_get_post_id($post_id);
+	
+	if (is_admin() && !empty($post_id)) {
+		
+		$title = strtolower(get_the_title($post_id));
+		
+		$options = disable_gutenberg_get_options();
+		
+		$whitelist = isset($options['whitelist-title']) ? $options['whitelist-title'] : null;
+		
+		$whitelist = disable_gutenberg_explode($whitelist);
+		
+	}
+	
+	return in_array($title, $whitelist);
+	
+}
+
+function disable_gutenberg_explode($string) {
+	
+	$explode = array_map('trim', explode(',', $string));
+	
+	$array = array();
+	
+	foreach ($explode as $item) {
+		
+		$array[] = strtolower($item);
+		
+	}
+	
+	return $array;
+	
+}
+
+function disable_gutenberg_get_post_id($post_id = false) {
+	
+	if (empty($post_id)) {
+		
+		$post_id = isset($_GET['post']) ? intval($_GET['post']) : null;
+		
+	}
+	
+	return $post_id;
 	
 }

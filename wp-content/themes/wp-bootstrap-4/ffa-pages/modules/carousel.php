@@ -36,7 +36,7 @@ if( have_rows('slide_repeater') ):
     </div>
     <div class="mobile-slide">
           <img style="width: 100%;" src="<?php the_sub_field('image') ?>" alt="">
-          <div style="margin-top: -10px;padding: 25px;">
+          <div style="padding: 25px;">
 
                 <?php if(get_sub_field('header')){ ?>
                   <h1><?php the_sub_field('header') ?></h1>
@@ -61,3 +61,137 @@ endif; ?>
 <div>
 </div>
 </section>
+
+
+<section class="full-width-alt-background">
+
+<div class="container">
+<div class="row text-center">
+<h2>Recent Media</h2>
+</div>
+<div class="row text-center">
+
+
+
+
+
+<ul class="partners">
+
+
+<li>
+
+<div class="partner-item">
+<a href="">
+<img class="partner-logo" src="http://localhost:8888/wp-content/themes/wp-bootstrap-4/assets/images/logos/cheddar.png" alt="partner-logo">
+</a>
+</div>
+
+
+</li>
+
+
+<li>
+
+<div class="partner-item">
+<a href="">
+<img class="partner-logo" src="http://localhost:8888/wp-content/themes/wp-bootstrap-4/assets/images/logos/cheddar.png" alt="partner-logo">
+</a>
+</div>
+
+
+</li>
+
+<li>
+
+<div class="partner-item">
+<a href="">
+<img class="partner-logo" src="http://localhost:8888/wp-content/themes/wp-bootstrap-4/assets/images/logos/cheddar.png" alt="partner-logo">
+</a>
+</div>
+
+
+</li>
+
+<li>
+
+<div class="partner-item">
+<a href="">
+<img class="partner-logo" src="http://localhost:8888/wp-content/themes/wp-bootstrap-4/assets/images/logos/cheddar.png" alt="partner-logo">
+</a>
+</div>
+
+
+</li>
+
+<li>
+
+<div class="partner-item">
+<a href="">
+<img class="partner-logo" src="http://localhost:8888/wp-content/themes/wp-bootstrap-4/assets/images/logos/cheddar.png" alt="partner-logo">
+</a>
+</div>
+
+
+</li>
+
+<li>
+
+<div class="partner-item">
+<a href="">
+<img class="partner-logo" src="http://localhost:8888/wp-content/themes/wp-bootstrap-4/assets/images/logos/cheddar.png" alt="partner-logo">
+</a>
+</div>
+
+
+</li>
+
+<li>
+
+<div class="partner-item">
+<a href="">
+<img class="partner-logo" src="http://localhost:8888/wp-content/themes/wp-bootstrap-4/assets/images/logos/cheddar.png" alt="partner-logo">
+</a>
+</div>
+
+
+</li>
+
+<li>
+
+<div class="partner-item">
+<a href="">
+<img class="partner-logo" src="http://localhost:8888/wp-content/themes/wp-bootstrap-4/assets/images/logos/cheddar.png" alt="partner-logo">
+</a>
+</div>
+
+
+</li>
+
+<li>
+
+<div class="partner-item">
+<a href="">
+<img class="partner-logo" src="http://localhost:8888/wp-content/themes/wp-bootstrap-4/assets/images/logos/cheddar.png" alt="partner-logo">
+</a>
+</div>
+
+
+</li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+</section>
+

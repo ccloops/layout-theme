@@ -3,16 +3,16 @@
 	Plugin Name: Disable Gutenberg
 	Plugin URI: https://perishablepress.com/disable-gutenberg/
 	Description: Disables Gutenberg Block Editor and restores the Classic Editor and original Edit Post screen. Provides options to enable on specific post types, user roles, and more.
-	Tags: gutenberg, block editor, block-editor, disable, blocks, post types
+	Tags: editor, classic editor, block editor, block-editor, gutenberg, disable, blocks, posts, post types
 	Author: Jeff Starr
 	Author URI: https://plugin-planet.com/
 	Donate link: https://monzillamedia.com/donate.html
 	Contributors: specialk
-	Requires at least: 4.5
+	Requires at least: 4.9
 	Tested up to: 5.0
-	Stable tag: 1.4
-	Version: 1.4
-	Requires PHP: 5.2
+	Stable tag: 1.5.2
+	Version: 1.5.2
+	Requires PHP: 5.2.4
 	Text Domain: disable-gutenberg
 	Domain Path: /languages
 	License: GPL v2 or later
@@ -51,22 +51,26 @@ if (!class_exists('DisableGutenberg')) {
 			add_filter('plugin_action_links', array($this, 'action_links'), 10, 2);
 			add_filter('plugin_row_meta',     array($this, 'plugin_links'), 10, 2);
 			
-			add_action('admin_enqueue_scripts', 'disable_gutenberg_enqueue_resources_admin');
-			add_action('admin_print_scripts',   'disable_gutenberg_print_js_vars_admin');
+			add_action('admin_enqueue_scripts', 'disable_gutenberg_admin_enqueue_scripts');
+			add_action('admin_print_scripts',   'disable_gutenberg_admin_print_scripts');
 			add_action('admin_notices',         'disable_gutenberg_admin_notice');
 			add_action('admin_init',            'disable_gutenberg_register_settings');
 			add_action('admin_init',            'disable_gutenberg_reset_options');
 			add_action('admin_menu',            'disable_gutenberg_menu_pages');
 			add_action('admin_menu',            'disable_gutenberg_menu_items', 999);
+			add_action('admin_init',            'disable_gutenberg_acf_enable_meta');
+			add_action('admin_init',            'disable_gutenberg_privacy_notice');
 			add_filter('admin_init',            'disable_gutenberg_disable_nag');
 			add_filter('admin_init',            'disable_gutenberg_init');
+			
+			add_filter('wp_enqueue_scripts', 'disable_gutenberg_wp_enqueue_scripts', 100);
 			
 		}
 		
 		function constants() {
 			
-			if (!defined('DISABLE_GUTENBERG_VERSION')) define('DISABLE_GUTENBERG_VERSION', '1.4');
-			if (!defined('DISABLE_GUTENBERG_REQUIRE')) define('DISABLE_GUTENBERG_REQUIRE', '4.5');
+			if (!defined('DISABLE_GUTENBERG_VERSION')) define('DISABLE_GUTENBERG_VERSION', '1.5.2');
+			if (!defined('DISABLE_GUTENBERG_REQUIRE')) define('DISABLE_GUTENBERG_REQUIRE', '4.9');
 			if (!defined('DISABLE_GUTENBERG_AUTHOR'))  define('DISABLE_GUTENBERG_AUTHOR',  'Jeff Starr');
 			if (!defined('DISABLE_GUTENBERG_NAME'))    define('DISABLE_GUTENBERG_NAME',    __('Disable Gutenberg', 'disable-gutenberg'));
 			if (!defined('DISABLE_GUTENBERG_HOME'))    define('DISABLE_GUTENBERG_HOME',    esc_url('https://perishablepress.com/disable-gutenberg/'));
@@ -82,7 +86,6 @@ if (!class_exists('DisableGutenberg')) {
 			if (is_admin()) {
 				
 				require_once DISABLE_GUTENBERG_DIR .'inc/classic-editor.php';
-				
 				require_once DISABLE_GUTENBERG_DIR .'inc/plugin-core.php';
 				require_once DISABLE_GUTENBERG_DIR .'inc/resources-enqueue.php';
 				require_once DISABLE_GUTENBERG_DIR .'inc/settings-display.php';
@@ -95,6 +98,10 @@ if (!class_exists('DisableGutenberg')) {
 					
 				}
 				
+			} else {
+				
+				require_once DISABLE_GUTENBERG_DIR .'inc/plugin-frontend.php';
+				
 			}
 			
 		}
@@ -103,12 +110,19 @@ if (!class_exists('DisableGutenberg')) {
 			
 			$options = array(
 				
-				'disable-all' => 1,
-				'disable-nag' => 1,
-				'hide-menu'   => 0,
-				'hide-gut'    => 0,
-				'templates'   => '',
-				'post-ids'    => '',
+				'disable-all'     => 1,
+				'disable-nag'     => 1,
+				'hide-menu'       => 0,
+				'hide-gut'        => 0,
+				'templates'       => '',
+				'post-ids'        => '',
+				'acf-enable'      => 0,
+				'links-enable'    => 0,
+				'whitelist-id'    => '',
+				'whitelist-slug'  => '',
+				'whitelist-title' => '',
+				'whitelist'       => 0,
+				'styles-enable'   => 0,
 				
 			);
 			
@@ -138,7 +152,7 @@ if (!class_exists('DisableGutenberg')) {
 		
 		function action_links($links, $file) {
 			
-			if ($file === DISABLE_GUTENBERG_FILE) {
+			if (($file === DISABLE_GUTENBERG_FILE) && (current_user_can('manage_options'))) {
 				
 				$settings = '<a href="'. admin_url('options-general.php?page=disable-gutenberg') .'">'. esc_html__('Settings', 'disable-gutenberg') .'</a>';
 				
@@ -153,6 +167,12 @@ if (!class_exists('DisableGutenberg')) {
 		function plugin_links($links, $file) {
 			
 			if ($file === DISABLE_GUTENBERG_FILE) {
+				
+				$home_href  = 'https://perishablepress.com/disable-gutenberg/';
+				$home_title = esc_attr__('Plugin Homepage', 'disable-gutenberg');
+				$home_text  = esc_html__('Homepage', 'disable-gutenberg');
+				
+				$links[] = '<a target="_blank" rel="noopener noreferrer" href="'. $home_href .'" title="'. $home_title .'">'. $home_text .'</a>';
 				
 				$rate_href  = 'https://wordpress.org/support/plugin/'. DISABLE_GUTENBERG_SLUG .'/reviews/?rate=5#new-post';
 				$rate_title = esc_attr__('Click here to rate and review this plugin on WordPress.org', 'disable-gutenberg');

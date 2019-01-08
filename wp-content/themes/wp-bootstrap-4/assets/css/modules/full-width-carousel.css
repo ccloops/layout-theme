@@ -4,12 +4,6 @@
     min-height: 400px;
   }
 
-/*.owl-carousel .owl-stage-outer {
-    overflow-x: hidden !important;
-    overflow-y: initial !important;
-}
-*/
-
 .full-width-carousel .owl-carousel{
     margin-top: 40px;
   }
@@ -17,5 +11,9 @@
 
 
 .full-width-carousel .owl-carousel .owl-item img{
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
+
+
+
+

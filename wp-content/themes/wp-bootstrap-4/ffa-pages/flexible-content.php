@@ -59,6 +59,11 @@ include 'modules/past-events-lightbox.php';
 elseif( get_row_layout() == 'singular_page' ):
 include 'modules/singular-page.php';
 
+
+// done
+elseif( get_row_layout() == 'full-width-alt-background' ):
+include 'modules/full-width-alt-background.php';
+
 endif;
 
 endwhile;

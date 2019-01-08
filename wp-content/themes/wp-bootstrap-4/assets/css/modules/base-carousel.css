@@ -2,6 +2,19 @@ h3 {
     font-family: "Gotham-Medium";
 }
 
+.navbar-toggler,
+.navbar-toggler:active,
+.navbar-toggler:hover,
+.navbar-toggler:focus{
+    background-color: transparent;
+    outline: none;
+    padding-right: 0;
+}
+
+
+
+
+
 .centered-text{
   text-align: center;
 }
@@ -214,6 +227,16 @@ input.email::placeholder
 }
 
 
+.half-width-left-list form input.mc-button:hover,
+.sign-up-bar form input.mc-button:hover,
+.half-width-left-list form input.mc-button:focus,
+.sign-up-bar form input.mc-button:focus,
+.half-width-left-list form input.mc-button:active,
+.sign-up-bar form input.mc-button:active{
+  border: 1px solid #85808F;
+  background-color: #85808F;
+  outline: none;
+}
 
 .sign-up-bar.fixed{
   margin-bottom: 0;
@@ -550,7 +573,8 @@ display: none;
 
 
 .mobile-slide > div{
-background-image: url(/wp-content/themes/wp-bootstrap-4/assets/images/slash-rotated.svg);
+  background-color: #fbeeec;
+  margin-top: 0px;
 }
 
 

@@ -1,3 +1,15 @@
 .past-events-lightbox .col-sm-4 img{
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
+
+
+
+
+
+.past-events-lightbox .col-sm-4 h3 a,
+.past-events-lightbox .col-sm-4 h3{
+    color: #261C42;
+    font-family: "Gotham-Medium";
+    font-size: 28px;
+    margin-bottom: 2px;
+  }

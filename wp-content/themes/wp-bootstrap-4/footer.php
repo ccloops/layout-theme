@@ -243,7 +243,7 @@ $(window).on('resize scroll', function() {
 
 $('.four-up-lightbox .col-sm-3').click(function(){
 
-$('body').prepend('<div class="four-up-lightbox-modal"><div class="close">x</div><div class="container"><img src="' + $(this).find('img').attr('src') + '"><h5>' + $(this).find('h5').text() + '</h5><span class="handle">' + $(this).find('.handle').text() + '</span><div class="description">' + $(this).find('p').text() + '</div></div></div>')
+$('body').prepend('<div class="four-up-lightbox-modal"><div class="close">X</div><div class="container"><img src="' + $(this).find('img').attr('src') + '"><h5>' + $(this).find('h5').text() + '</h5><span class="handle">' + $(this).find('.handle').text() + '</span><div class="description">' + $(this).find('p').text() + '</div></div></div>')
 });
 
 

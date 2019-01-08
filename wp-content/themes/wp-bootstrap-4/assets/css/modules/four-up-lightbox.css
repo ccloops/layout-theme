@@ -1,5 +1,5 @@
 .four-up-lightbox .col-sm-3 img{
-    margin-bottom: 20px;
+    margin-bottom: 12px;
 }
 
 .four-up-lightbox .container.text-center{
@@ -20,10 +20,8 @@
 
 .four-up-lightbox .col-sm-3{
     cursor: pointer;
+    text-align: center;
 }
-
-
-
 
 .four-up-lightbox-modal{
   width: 100%;
@@ -33,7 +31,20 @@
   z-index: 10000;
 }
 
+.four-up-lightbox-modal .close{
+    width: 50px;
+    height: 50px;
+    background-image: url(../../images/close-box.svg);
+    color: transparent;
+    text-shadow: none;
+    opacity: 1;
+    margin: 20px;
+  }
 
+.close:not(:disabled):not(.disabled):hover, .close:not(:disabled):not(.disabled):focus{
+  color: transparent;
+  outline: none;
+}
 
 
 .four-up-lightbox-modal img{
@@ -41,3 +52,5 @@
   margin-bottom: 40px;
   margin-top: 100px;
 }
+
+

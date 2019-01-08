@@ -1,0 +1,33 @@
+section.full-width-alt-background{
+  background-image: url(../../images/alt-bg.jpg);
+  background-position: 50% 50%;
+  text-align: center;
+  padding: 60px 0;
+}
+
+section.full-width-alt-background h2{
+  color: #fff !important;
+  margin: 0 auto;
+}
+
+.partner-item{
+    padding: 40px 0 0;
+}
+
+.partner-item img{
+  width: 80%;
+}
+
+ul.partners{
+    width: 100%;
+    list-style-type: none;
+    padding: 0;
+    text-align:center;
+}
+
+ul.partners li{
+    display: inline-block;
+    width: 24%;
+    text-align: center;
+    line-height: 50px;
+}
